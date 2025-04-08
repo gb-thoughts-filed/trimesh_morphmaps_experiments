@@ -2,6 +2,8 @@
 # ignore all ini files
 *.ini
 
+
 #ignore virtual environments
 .venv/
 .venv1/
+.idea/
