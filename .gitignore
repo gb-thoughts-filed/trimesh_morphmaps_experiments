@@ -1,0 +1,7 @@
+# created by virtualenv automatically
+# ignore all ini files
+*.ini
+
+#ignore virtual environments
+.venv/
+.venv1/
