@@ -37,18 +37,19 @@ def centre(coord_norm):
     return coord_norm
 
 source = trimesh.load('dogs_results/dogs/fox-05.ply')
-target = trimesh.load('dogs_results/dogs/dog_alph.ply')
+target = trimesh.load('dogs_results/dogs/fox-05.ply')
 source.vertices = normalize_coords(source.vertices, move_to_centre=True)
-source.vertices *= 0.8
-source.vertices = centre(source.vertices)
+# source.vertices *= 0.8
+# source.vertices = centre(source.vertices)
 # batsy2.vertices = np.stack([batsy.vertices[:, 0], batsy.vertices[:, 1], batsy.vertices[:, 2]*5], axis=1)
 target.vertices = normalize_coords(target.vertices, move_to_centre=True)
-target.vertices *= 0.8
-target.vertices = centre(target.vertices)
+# target.vertices *= 0.8
+# target.vertices = centre(target.vertices)
 
 
 reg = trimesh.registration.nricp_amberg(source, target, distance_threshold=0.1, return_records=True)
 iters = np.array(reg)
+reg1= trimesh.registration.nricp_amberg(source, target, distance_threshold=0.1)
 # print(iters[-1])
 
 #mesh vertices, and mesh topology, just be able to cover the mesh at every single step

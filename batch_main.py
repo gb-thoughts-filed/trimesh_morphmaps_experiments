@@ -31,6 +31,7 @@ class TriMeshExperiment:
         self.target_mesh_adjustment = settings["target_mesh_adjustment"]
         self.fps: 1
         self.process_num = np.random.randint(1000,9999)
+        self.config = str(config).split(".")[0].split("_", 7)[-1]
 
         #Trimesh Specific Needs
         self.source_landmarks = settings["source_landmarks"]
@@ -43,7 +44,7 @@ class TriMeshExperiment:
         self.use_vertex_normals = settings["use_vertex_normals"]
         self.neighbors_count = settings["neighbors_count"]
         self.d = datetime.now().strftime("%Y%m%d%H%M")
-        self.folder_name = f"{self.d}_{self.process_num}_{self.source_name}_{self.target_name}"
+        self.folder_name = f"{self.d}_{self.process_num}_{self.source_name}_{self.target_name}_yaml_{self.config}"
 
         #Experiment Setup
         os.mkdir(self.folder_name)
@@ -131,33 +132,33 @@ class TriMeshExperiment:
             ps.screenshot(filename=f"{self.folder_name}/{i + iters.shape[0]}.png")
             ps.show(1)
 
-        for i in np.arange(iters.shape[0]):
-            ps.init()
-
-            b_vis = ps.register_surface_mesh("src", src.vertices, src.faces, enabled=False)
-            w_vis = ps.register_surface_mesh("trgt", trgt.vertices, trgt.faces, transparency=0.5)
-            reg_vis0 = ps.register_surface_mesh("r", iters[i], trgt.faces)
-
-            ps.set_up_dir("neg_y_up")
-            ps.set_front_dir("z_front")
-            ps.set_screenshot_extension(".png")
-            ps.screenshot(filename=f"{self.folder_name}/{i + 2 * iters.shape[0]}.png")
-            ps.show(1)
-
-        for i in np.arange(iters.shape[0]):
-            ps.init()
-
-            b_vis = ps.register_surface_mesh("src", src.vertices, src.faces, enabled=False)
-            w_vis = ps.register_surface_mesh("trgt", trgt.vertices, trgt.faces, transparency=0.5)
-            reg_vis0 = ps.register_surface_mesh("r", iters[i], trgt.faces)
-
-            ps.set_up_dir("neg_y_up")
-            ps.set_front_dir("neg_z_front")
-            ps.set_screenshot_extension(".png")
-            ps.screenshot(filename=f"{self.folder_name}/{i + 3 * iters.shape[0]}.png")
-            ps.show(1)
+        # for i in np.arange(iters.shape[0]):
+        #     ps.init()
+        #
+        #     b_vis = ps.register_surface_mesh("src", src.vertices, src.faces, enabled=False)
+        #     w_vis = ps.register_surface_mesh("trgt", trgt.vertices, trgt.faces, transparency=0.5)
+        #     reg_vis0 = ps.register_surface_mesh("r", iters[i], trgt.faces)
+        #
+        #     ps.set_up_dir("neg_y_up")
+        #     ps.set_front_dir("z_front")
+        #     ps.set_screenshot_extension(".png")
+        #     ps.screenshot(filename=f"{self.folder_name}/{i + 2 * iters.shape[0]}.png")
+        #     ps.show(1)
+        #
+        # for i in np.arange(iters.shape[0]):
+        #     ps.init()
+        #
+        #     b_vis = ps.register_surface_mesh("src", src.vertices, src.faces, enabled=False)
+        #     w_vis = ps.register_surface_mesh("trgt", trgt.vertices, trgt.faces, transparency=0.5)
+        #     reg_vis0 = ps.register_surface_mesh("r", iters[i], trgt.faces)
+        #
+        #     ps.set_up_dir("neg_y_up")
+        #     ps.set_front_dir("neg_z_front")
+        #     ps.set_screenshot_extension(".png")
+        #     ps.screenshot(filename=f"{self.folder_name}/{i + 3 * iters.shape[0]}.png")
+        #     ps.show(1)
 
         utils.video_from_image_dir(self.folder_name, f"{self.folder_name}/{self.folder_name}.mp4")
 
 
-exp1 = TriMeshExperiment("muybridge_014_01_to_muybridge_030_02_no_alt_20250407_experiment_config.yaml")
+exp1 = TriMeshExperiment("fox_to_fox06_ablation_20250409_experiment_config_pt08_10_pt5.yaml")
